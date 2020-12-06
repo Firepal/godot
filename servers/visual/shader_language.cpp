@@ -2135,7 +2135,9 @@ bool ShaderLanguage::_validate_function_call(BlockNode *p_block, OperatorNode *p
 
 				if (!fail) {
 					if (VisualServer::get_singleton()->is_low_end()) {
-						if (builtin_func_defs[idx].high_end) {
+						if(name == "dFdx" || name == "dFdy" || name == "fwidth" ){
+							builtin_idx = idx;
+						} else if (builtin_func_defs[idx].high_end) {
 							fail = true;
 							unsupported_builtin = true;
 							builtin_idx = idx;
